@@ -12,3 +12,20 @@ body {
   -webkit-text-stroke: 2px #0F142D;
   color: transparent;
 }
+
+input:focus {
+  outline: none;
+}
+
+input {
+  padding-left: .5rem;
+  padding-right: .5rem;
+}
+
+input::placeholder {
+  color: white;
+}
+
+.textShadow {
+  text-shadow: .5px .5px 3px black;
+}
