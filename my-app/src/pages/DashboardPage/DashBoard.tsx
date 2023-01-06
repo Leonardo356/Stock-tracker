@@ -1,4 +1,5 @@
 import React from "react";
+import HomePage from "../../components/DashboardComp/DashboardPages/HomePage/HomePage";
 import NavDashBoard from "../../components/DashboardComp/NavDashboard/NavDashboard";
 
 const Dashboard: React.FC = () => {
@@ -10,6 +11,7 @@ const Dashboard: React.FC = () => {
           flex
           ">
             <NavDashBoard />
+            <HomePage />
           </div>
         </>
     );

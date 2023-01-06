@@ -22,6 +22,8 @@ const NavDashBoard: React.FC = () => {
           h-screen
           bg-navy-100
           shadow-sh2
+          relative
+          z-[200]
           flex
           flex-col
           p-[1rem]
