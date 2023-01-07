@@ -16,6 +16,7 @@ const HomeContent: React.FC = () => {
           text-navy-100
           text-[1.2rem]
           font-bold
+          overflow-scroll
           ">
             <CapacitySection />
             <ExpensesSection />

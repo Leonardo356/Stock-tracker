@@ -13,6 +13,7 @@ import DisplayActionBtn from "./displayActionBtns";
 import LogOutSvg from './navSvg/logOutSvg.svg';
 import LogOutBtn from "./LogOutBtn";
 import UserProfile from "./userProfile";
+import SellSvg from "./navSvg/sellSvg.svg";
 
 const NavDashBoard: React.FC = () => {
     return(
@@ -90,6 +91,11 @@ const ActionBtnsContainer: React.FC = () => {
           <ActionBtns
           iconUrl={AddItemsSvg}
           navBtnName='Add items' 
+          />
+
+          <ActionBtns
+          iconUrl={SellSvg}
+          navBtnName='Sell items' 
           />
       </div>
     );

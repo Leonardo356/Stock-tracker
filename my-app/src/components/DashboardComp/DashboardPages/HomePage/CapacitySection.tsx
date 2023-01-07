@@ -1,4 +1,5 @@
 import React from "react";
+import { hoverRotate } from "../../../../functions/functions";
 
 const CapacitySection: React.FC = () => {
     return(
@@ -21,7 +22,7 @@ const CapacitySection: React.FC = () => {
 const UnitsContainer: React.FC = () => {
    return(
      <>
-        <div className="flex gap-[2rem] w-full h-max">
+        <div className="flex p-[1rem] gap-[2rem] flex-wrap w-full h-max">
           <Unit 
           bgColor="bg-gradient-to-r from-navy-100 to-navy-200"
           textColor="text-white" 
@@ -37,6 +38,13 @@ const UnitsContainer: React.FC = () => {
           textColor="text-navy-100" 
           unitName="Store2"
           />
+
+          <Unit 
+          bgColor="bg-white"
+          textColor="text-navy-100" 
+          unitName="Store3"
+          />
+
         </div>
      </>
    );
@@ -51,16 +59,21 @@ interface UnitProps {
 const Unit: React.FC<UnitProps> = ({ bgColor, textColor, unitName }) => {
      return(
         <>
-           <div className={`
+           <div
+           onMouseMove={hoverRotate}
+           onMouseLeave={hoverRotate} 
+           className={`
            w-[20rem]
-           h-[15rem]
+           h-[8rem]
            ${bgColor}
            ${textColor}
            rounded-[1rem]
            shadow-sh2
+           duration-[100ms]
            p-[1rem]
            flex
            flex-col
+           cursor-pointer
            `}>
              <div className="text-[2vmax]">{unitName}</div>
              <div className="mt-auto w-full flex">
