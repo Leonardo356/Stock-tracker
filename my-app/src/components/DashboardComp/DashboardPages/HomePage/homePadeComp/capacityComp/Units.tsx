@@ -8,7 +8,9 @@ const db = getDatabase();
 const auth = getAuth(); 
 
 interface StoresData {
-    storeName: 'string',
+    storeName: {
+      name: 'string',
+    },
     date: string,
     uidd: string,
 };
@@ -38,7 +40,7 @@ const UnitsContainer: React.FC = () => {
          <div className="flex p-[1rem] gap-[2rem] flex-wrap w-full h-max">
 
            <Unit 
-           isStorage={true}
+           uidd="storage"
            unitClass="storageOnCapacity"
            bgColor="bg-gradient-to-r from-navy-100 to-navy-200"
            textColor="text-white" 
@@ -48,12 +50,12 @@ const UnitsContainer: React.FC = () => {
            {
              storesData.map((values, index) => (
                <Unit 
-               isStorage={false}
+               uidd={values.uidd}
                unitClass={values.uidd}
                key={index}
                bgColor="bg-white"
                textColor="text-black" 
-               unitName={values.storeName}
+               unitName={values.storeName.name}
                />
              ))
            }
@@ -68,10 +70,10 @@ interface UnitProps {
     textColor: string,
     unitName: string,
     unitClass: string,
-    isStorage: boolean,
+    uidd: string,
 };
  
-const Unit: React.FC<UnitProps> = ({ bgColor, textColor, unitName }) => {
+const Unit: React.FC<UnitProps> = ({ bgColor, textColor, unitName, uidd }) => {
  
     const [hoverColor, setHoverColor] = useState<string>('');
  
@@ -103,7 +105,9 @@ const Unit: React.FC<UnitProps> = ({ bgColor, textColor, unitName }) => {
            `}>
              <EditUnitBtn hoverColor={hoverColor} />
              <div className="text-[2vmax] duration-[200ms] unitNameOnDOM">{unitName}</div>
-             <UnitsEditSection color={bgColor} />
+             <UnitsEditSection 
+             uidd={uidd}
+             color={bgColor} />
              <div className="mt-auto w-full flex">
                 <p>Items in:</p>
                 <p className="ml-auto">30</p>

@@ -116,17 +116,21 @@ const StoreNameInput: React.FC = () => {
 
 const CreateStoreBtn: React.FC = () => {
 
-     // eslint-disable-next-line
      const [storeName, setStoreName] = storeNameStore.useState<string>('storeName');
 
     const writeStoreData = () => {
         const user = auth.currentUser;
         let uidd = uid();
-        set(ref(db, `users/${user?.uid}/stores/${uidd}`), {
-          storeName: storeName,
+
+        const StoreData = {
+          storeName: {
+            name: storeName,
+          },
           date: GetFullDate(),
           uidd: uidd,
-        });
+        };
+
+        set(ref(db, `users/${user?.uid}/stores/${uidd}`), StoreData);
 
         toast.success(`${storeName} successfully created`);
         setStoreName('');
