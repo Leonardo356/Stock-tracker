@@ -17,6 +17,7 @@
     "react-toastify": "^9.1.1",
     "state-pool": "^0.9.0",
     "typescript": "^4.9.4",
+    "uid": "^2.0.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

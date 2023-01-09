@@ -1,4 +1,5 @@
-import React from "react";
+import React, { ReactEventHandler } from "react";
+import { DisplayActionWindow } from "../../../functions/functions";
 
 interface ActionBtnsProps {
     iconUrl: string,
@@ -6,9 +7,18 @@ interface ActionBtnsProps {
 };
 
 const ActionBtns: React.FC<ActionBtnsProps> = ({ iconUrl, navBtnName }) => {
+
+    const displayFunction: ReactEventHandler = () => {
+        navBtnName === 'Create store'
+        ? DisplayActionWindow('createStorePageContainer', 'createStoreWindowContainer')
+        : alert('noFunctionyet');
+    };
+
     return(
         <>
-           <div className={`
+           <div 
+           onClick={displayFunction}
+           className={`
            w-full
            h-max
            flex

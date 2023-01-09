@@ -1,56 +1,49 @@
-import { MouseEventHandler } from "react";
+export const CloseActionWindow = (
+  e: React.MouseEvent<Element, MouseEvent>,
+  pageContainerClass: string,
+  containerWindowClass: string,
+) => {
+    if(e.currentTarget !== e.target) return;
+    let pageContainer = document.querySelector(`.${pageContainerClass}`) as HTMLElement | null;
+    let containerWindow = document.querySelector(`.${containerWindowClass}`) as HTMLElement | null;
 
-const rotate = (
-     el: HTMLElement | null, 
-     x: number, 
-     y: number
-    ) => {
-    let bounds = el!.getBoundingClientRect();
-    const mouseX = x - window.scrollX;
-    const mouseY = y - window.scrollY;
-    const leftX = mouseX - bounds.x;
-    const topY = mouseY - bounds.y;
-    const center = {
-      x: leftX - bounds.width / 2,
-      y: topY - bounds.height / 2
-    };
-    const distance = Math.sqrt(center.x**2 + center.y**2);
-    
-   el!.style.transform = `
-   scale3d(1.07, 1.07, 1.07)
-   rotate3d(
-     ${center.y / 80},
-     ${-(center.x / 80)},
-     0,
-     ${Math.log(distance)*4}deg
-    )
-    `;
-
-  el!.style.boxShadow = `${center.x/7}px ${center.y/7}px 10px 2px rgba(20, 21, 20, 20%)`;
-    
-    let bgHover = el!.querySelector('.cardGlow') as HTMLElement | null;
-    bgHover!.style.backgroundImage = `
-    radial-gradient(
-      circle at
-      ${center.x * 2 + bounds.width/2}px
-      ${center.y * 2 + bounds.height/2}px,
-      rgba(255, 255, 255, 40%),
-      transparent 60%
-   )
-    `;
+    containerWindow!?.classList.add('scale-[0]');
+    setTimeout(() => { pageContainer!?.classList.add('hidden');}, 210);
 };
 
-export const hoverRotate: MouseEventHandler = e => {
-  let x = e.pageX;
-  let y = e.pageY;
-  let el = e.currentTarget as HTMLElement | null;
-  let eventType = e.type;
-  
-  if(eventType === 'mousemove') rotate(el, x, y);
-  else {
-    el!.style.transform = '';
-    el!.style.boxShadow = '';
-    let glow = el!.querySelector('.cardGlow')as HTMLElement | null;
-    glow!.style.background = '';
-  }
-}
+export const DisplayActionWindow = (
+  pageContainerClass: string,
+  containerWindowClass: string,
+) => {
+  let pageContainer = document.querySelector(`.${pageContainerClass}`) as HTMLElement | null;
+  let containerWindow = document.querySelector(`.${containerWindowClass}`) as HTMLElement | null;
+
+  pageContainer!?.classList.remove('hidden');
+  setTimeout(() => { containerWindow!?.classList.remove('scale-[0]');}, 1);
+};
+
+export const GetFullDate = () => {
+  let date = new Date();
+  let year = date.getFullYear();
+  let month = date.getMonth() + 1;
+  let day = date.getDate();
+  let hour = date.getHours();
+  let min = date.getMinutes();
+  let sec = date.getSeconds();
+
+  let monthFull: string = '';
+  let dayFull: string = '';
+  let hourFull: string = '';
+  let minFull: string = '';
+  let secFull: string = '';
+
+  month < 10 ? monthFull = `0${month}` : monthFull = `${month}`;
+  day < 10 ? dayFull = `0${day}` : dayFull = `${day}`;
+  hour < 10 ? hourFull = `0${hour}` : hourFull = `${hour}`;
+  min < 10 ? minFull = `0${min}` : minFull = `${min}`;
+  sec < 10 ? secFull = `0${sec}` : secFull = `${sec}`;
+
+  let fullDate = `${year}${monthFull}${dayFull}${hourFull}${minFull}${secFull}`
+
+  return fullDate;
+};
