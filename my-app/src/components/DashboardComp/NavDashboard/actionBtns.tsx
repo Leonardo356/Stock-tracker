@@ -11,7 +11,9 @@ const ActionBtns: React.FC<ActionBtnsProps> = ({ iconUrl, navBtnName }) => {
     const displayFunction: ReactEventHandler = () => {
         navBtnName === 'Create store'
         ? DisplayActionWindow('createStorePageContainer', 'createStoreWindowContainer')
-        : alert('noFunctionyet');
+        : navBtnName === 'Add items'
+        ? DisplayActionWindow('createItemPageContainer', 'createItemWindowContainer')
+        : alert('no function yet')
     };
 
     return(

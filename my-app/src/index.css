@@ -41,3 +41,11 @@ input::placeholder {
 .blackTextInp {
   color: black;
 }
+
+input[type=number]::-webkit-inner-spin-button {
+  display: none;
+}
+
+select:focus {
+  outline: none;
+}

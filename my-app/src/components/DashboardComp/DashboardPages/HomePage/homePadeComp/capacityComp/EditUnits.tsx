@@ -40,7 +40,7 @@ const UnitsEditSection: React.FC<EditProps> = ({ color, uidd }) => {
 
       const addStorageNameToData = () => {
         let user = auth.currentUser;
-        set(ref(db, `users/${user!.uid}/storage`), { storageName: newStoreName, });
+        set(ref(db, `users/${user!.uid}/storage/`), { storageName: newStoreName, });
       };
 
       const editStoreName = () => {
@@ -49,13 +49,14 @@ const UnitsEditSection: React.FC<EditProps> = ({ color, uidd }) => {
       };
 
       const ifInputIsAllowed = (event: React.MouseEvent<Element, MouseEvent>) => {
-        uidd === 'storage'
+        uidd === 'storage' || uidd.length === 16
         ? addStorageNameToData()
         : editStoreName();
 
         toast.success('Unit name successfully changed');
         closeEdit(event);
-        setNewStoreName('empty');
+        let editUnitsNameInputs = Array.from(document.querySelectorAll('.editStoreNameOnCapacity'));
+        editUnitsNameInputs.forEach(input => {if(input instanceof HTMLInputElement) input.value = '';});
       };
 
       const editUnitName: React.MouseEventHandler = (event) => {
@@ -86,6 +87,7 @@ const UnitsEditSection: React.FC<EditProps> = ({ color, uidd }) => {
             name="editUnitName"
             placeholder="Enter unit name..."
             className={`
+            editStoreNameOnCapacity
             ${colorBg}
             h-[3rem]
             rounded-[.5rem]

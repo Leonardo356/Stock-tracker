@@ -8,26 +8,43 @@ const db = getDatabase();
 const auth = getAuth(); 
 
 interface StoresData {
+   storage: {
+    storageName: string,
+   }
+    stores: {
+      key: {
+        storeName: {
+          name: 'string',
+        },
+        date: string,
+        uidd: string,
+      },
+    },
+};
+
+interface StoreDataArr {
     storeName: {
       name: 'string',
     },
     date: string,
     uidd: string,
-};
+}
  
 const UnitsContainer: React.FC = () => {
  
-   const [storesData, setStoresData] = useState<StoresData[]>([]);
+   const [storesData, setStoresData] = useState<StoreDataArr[]>([]);
+   const [storageName, setStorageName] = useState<string>('Storage')
  
    useEffect(() => {
-     let storesDataArr: StoresData[] = [];
+     let storesDataArr: StoreDataArr[] = [];
      onAuthStateChanged(auth, (user) => {
      if(user!) {
-       const dataRef = ref(db, `users/${user!.uid}/stores`);
+       const dataRef = ref(db, `users/${user!.uid}`);
        onValue(dataRef, (snapshot) => {
          storesDataArr = [];
          const data: StoresData | null = snapshot.val();
-         if(data!) Object.values(data).map(store => storesDataArr.push(store))
+         if(data!?.stores) Object.values(data.stores).map(stores => storesDataArr.push(stores));
+         if(data!?.storage) setStorageName(data.storage.storageName);
          storesDataArr.sort((a, b) => Number(a.date) - Number(b.date));
          setStoresData(storesDataArr);
        });
@@ -44,7 +61,7 @@ const UnitsContainer: React.FC = () => {
            unitClass="storageOnCapacity"
            bgColor="bg-gradient-to-r from-navy-100 to-navy-200"
            textColor="text-white" 
-           unitName="Storage"
+           unitName={storageName}
            />
            
            {

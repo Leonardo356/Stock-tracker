@@ -20,6 +20,8 @@ const CloseBtn: React.FC<CloseBtnProps> = ({ actionClass }) => {
     const CloseFunction: MouseEventHandler = (e) => {
         actionClass === 'createStore' 
         ? CloseActionWindow(e, 'createStorePageContainer', 'createStoreWindowContainer')
+        : actionClass === 'CreateItem'
+        ? CloseActionWindow(e, 'createItemPageContainer', 'createItemWindowContainer')
         : alert('no function yet')
     };
 
